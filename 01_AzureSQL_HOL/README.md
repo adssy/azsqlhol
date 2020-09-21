@@ -19,6 +19,7 @@ rm .\AzureCLI.msi
 ```powershell
 az login 
 az account set --subscription "{your subscription}"
+az account show
 ```
 
 ### 03. Azure VM 생성

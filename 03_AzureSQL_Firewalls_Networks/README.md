@@ -23,6 +23,11 @@ SSMS에서 실행 (방화벽 추가)
 EXECUTE sp_set_firewall_rule N'allowmyip', '*0.0.0.0', '*0.0.0.0';  
 ```
 
+SSMS에서 방화벽 확인
+```sql
+select * from sys.firewall_rules;
+```
+
 SSMS에서 실행 (방화벽 제거)  
 ```sql
 EXEC sp_delete_firewall_rule N'allowmyip'
@@ -36,6 +41,11 @@ SSMS에서 실행 (방화벽 추가)
 ```sql
 -- 아이피 수정 필요
 EXECUTE sp_set_database_firewall_rule N'allowmyip', '*0.0.0.0', '*0.0.0.0';  
+```
+
+SSMS에서 확인
+```sql
+select * from sys.database_firewall_rules;
 ```
 
 SSMS에서 실행 (방화벽 제거)  
@@ -60,14 +70,14 @@ $ruleName="allow-adstest"
 az network service-endpoint policy create --name "Microsoft.SQL" --resource-group $resourceGroup
 
 # Azure SQL에 해당 서브넷을 허용 합니다
-az sql server vnet-rule create --server $serverName --name $ruleName -g $resourceGroup --subnet $subnetName --vnet-name $vnetName
+az sql server vnet-rule create --server $serverName --name $ruleName -g $resourceGroup --subnet $subnetName --vnet-name $vnetName --ignore-missing-endpoint true
 ```
 
 ### 03. Private Link for Azure SQL Database
 서비스 엔드 포인트에는 몇 가지 제한이나 단점이 있습니다  
 서비스 엔드 포인트에 대한 트래픽이 여전히 가상 네트워크 외부로 나가며 Azure PaaS 리소스가 여전히 해당 공용 주소에서 액세스되고 있습니다  
-VPN 또는 Express Route를 통해 On-premise에서 발생하는 트래픽에서 사용할 수 없으며 Azure Virtual Network에서 들어오는 트래픽에만 사용할 수 있습니다  
-허용하려는 경우 온 프레미스 리소스 액세스를 허용하려면 해당 퍼블릭 IP도 허용해야합니다  
+VPN 또는 Express Route와 같은 연결로 Azure Virtual Network를 통해 들어오는 트래픽에만 사용할 수 있습니다  
+온 프레미스 리소스에 대한 액세스를 허용하려면 해당 퍼블릭 IP도 허용해야합니다  
 
 ![azsqlprivatelink](https://docs.microsoft.com/ko-kr/azure/azure-sql/database/media/quickstart-create-single-database/pe-connect-overview.png)
 

@@ -36,7 +36,7 @@ Azure SQL에서는 데이터베이스 간 Join 혹은 조회 및 Linked Server�
 
 ```powershell
 $newDBName="*myNewDBName"
-az sql db create -g $resourceGroup -s $serverName -n $dbName --collation $collation --sample-name AdventureWorksLT -e GeneralPurpose -f Gen4 -c 1
+az sql db create -g $resourceGroup -s $serverName -n $newDBName --collation $collation --sample-name AdventureWorksLT -e GeneralPurpose -f Gen5 -c 2
 
 # Allow Azure service
 ## 시작과 끝 아이피를 0.0.0.0 으로 지정하면 Azure 서비스 및 리소스가 서버에 엑세스 할수 있도록 허용 됩니다
