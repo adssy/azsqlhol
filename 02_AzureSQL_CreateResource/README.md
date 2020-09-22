@@ -12,7 +12,7 @@ $collation="Korean_Wansung_CI_AS"
 
 
 az sql server create -l $location -g $resourceGroup -n $serverName -u $userName -p $password
-az sql db create -g $resourceGroup -s $serverName -n $dbName --collation $collation --sample-name AdventureWorksLT -e GeneralPurpose -f Gen4 -c 2
+az sql db create -g $resourceGroup -s $serverName -n $dbName --collation $collation --sample-name AdventureWorksLT -e GeneralPurpose -f Gen5 -c 2
 ```
 
 ![azsqlgp](https://docs.microsoft.com/ko-kr/azure/azure-sql/database/media/high-availability-sla/general-purpose-service-tier.png)

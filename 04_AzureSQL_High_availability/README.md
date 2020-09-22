@@ -14,6 +14,13 @@ az sql server create --name $repServerName --resource-group $resourceGroup --loc
 az sql db replica create --name $dbName --partner-server $repServerName --resource-group $resourceGroup --server $serverName
 ```
 
+각 database에서 아래의 쿼리를 통해 해당 db에서의 updateability(READ_ONLY, READ_WRITE)를 확인할 수 있습니다.
+
+```sql
+-- 현재 접속이 읽기 전용 복제본인지 확인
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'Updateability')
+```
+
 ### 02. Failover Group
 Geo-Replication에서는 slave node를 master로 fail-over 하려면 수동으로 진행 가능 합니다  
 지역간의 fail-over를 자동으로 관리하기 위해서는 Failover Group을 사용하여야 합니다  
